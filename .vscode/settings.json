@@ -1,0 +1,15 @@
+{
+    "java.project.sourcePaths": ["src"],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/home/saksham/JAVA/Java Resources/Jars/spring jars/spring-beans-5.3.1.jar",
+        "/home/saksham/JAVA/Java Resources/Jars/spring jars/spring-context-5.3.1.jar",
+        "/home/saksham/JAVA/Java Resources/Jars/spring jars/spring-core-5.3.1.jar",
+        "/home/saksham/JAVA/Java Resources/Jars/spring jars/spring-expression-5.3.1.jar",
+        "/home/saksham/JAVA/Java Resources/Jars/spring jars/spring-jcl-5.3.1.jar",
+        "/home/saksham/JAVA/Java Resources/Jars/spring jars/spring-aop-5.3.1.jar",
+        "/home/saksham/JAVA/Java Resources/Jars/spring jars/javax.annotation-api-1.3.2.jar"
+    ],
+    "java.compile.nullAnalysis.mode": "automatic"
+}

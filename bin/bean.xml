@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Lazy-loaded beans -->
+    <bean id="demo" class="com.Main.Demo" lazy-init="true"/>
+    <bean id="femo" class="com.Main.femo" lazy-init="true"/>
+    <bean id="dow" class="com.Pojo.Dow" lazy-init="true"/>
+
+    <!-- Prototype scoped bean -->
+    <bean id="acc" class="com.Main.Account" scope="prototype"/>
+
+    <!-- DAO bean -->
+    <bean id="dao" class="com.Pojo.Dow"/>
+
+    <!-- Service bean (depends on dao) -->
+    <bean id="service" class="com.Pojo.Service" scope="prototype">
+        <property name="dao" ref="dao"/>
+        <!-- <constructor-arg></constructor-arg> -->
+    </bean>
+
+    <!-- Controller bean (depends on service) -->
+    <bean id="controller" class="com.Pojo.Controller" lazy-init="true">
+        <property name="service" ref="service"/>
+    </bean>
+
+    <!-- EmployeeBean using annotation lifecycle -->
+    <bean id="empbean" class="com.Main.EmployeeBean"/>
+     <bean id="empbean2" class="com.Main.EmployeeBean2"
+       factory-method="customObject"
+     
+     >
+
+
+
+     <!-- <constructor-arg name="companyCode" value="QWERTY"> </constructor-arg> -->
+      
+
+
+     </bean>
+
+
+    <!-- BeanPostProcessor for @PostConstruct / @PreDestroy -->
+    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>
+
+</beans>
