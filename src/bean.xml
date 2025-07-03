@@ -29,21 +29,24 @@
 
     <!-- EmployeeBean using annotation lifecycle -->
     <bean id="empbean" class="com.Main.EmployeeBean"/>
-     <bean id="empbean2" class="com.Main.EmployeeBean2"
-       factory-method="customObject"
-     
-     >
 
-
-
-     <!-- <constructor-arg name="companyCode" value="QWERTY"> </constructor-arg> -->
-      
-
-
-     </bean>
-
+    <bean id="empbean2" class="com.Main.EmployeeBean2"
+          factory-method="customObject">
+          
+        <!-- <constructor-arg name="companyCode" value="QWERTY"> </constructor-arg> -->
+    </bean>
 
     <!-- BeanPostProcessor for @PostConstruct / @PreDestroy -->
     <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>
+
+    <!-- bean post processor -->
+    <bean id="dao2" class="com.dam.Dao"></bean>
+    <bean id="service2" class="com.dam.Service">
+        <property name="dao" ref="dao2"></property>
+    </bean>
+    <bean id="controller2" class="com.dam.Controller">
+
+        <property name="service" ref="service2"></property>
+    </bean>
 
 </beans>
