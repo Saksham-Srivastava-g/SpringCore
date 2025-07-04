@@ -5,48 +5,35 @@
            http://www.springframework.org/schema/beans 
            http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!-- Lazy-loaded beans -->
+    <!-- Lazy-loaded beans (not needed now) -->
     <bean id="demo" class="com.Main.Demo" lazy-init="true"/>
     <bean id="femo" class="com.Main.femo" lazy-init="true"/>
     <bean id="dow" class="com.Pojo.Dow" lazy-init="true"/>
-
-    <!-- Prototype scoped bean -->
-    <bean id="acc" class="com.Main.Account" scope="prototype"/>
-
-    <!-- DAO bean -->
-    <bean id="dao" class="com.Pojo.Dow"/>
-
-    <!-- Service bean (depends on dao) -->
-    <bean id="service" class="com.Pojo.Service" scope="prototype">
+    <bean id="acc" class="com.Main.Account" scope="prototype" lazy-init="true"/>
+    <bean id="dao" class="com.Pojo.Dow" lazy-init="true"/>
+    <bean id="service" class="com.Pojo.Service" scope="prototype" lazy-init="true">
         <property name="dao" ref="dao"/>
-        <!-- <constructor-arg></constructor-arg> -->
     </bean>
-
-    <!-- Controller bean (depends on service) -->
     <bean id="controller" class="com.Pojo.Controller" lazy-init="true">
         <property name="service" ref="service"/>
     </bean>
-
-    <!-- EmployeeBean using annotation lifecycle -->
-    <bean id="empbean" class="com.Main.EmployeeBean"/>
-
+    <bean id="empbean" class="com.Main.EmployeeBean" lazy-init="true"/>
     <bean id="empbean2" class="com.Main.EmployeeBean2"
-          factory-method="customObject">
-          
-        <!-- <constructor-arg name="companyCode" value="QWERTY"> </constructor-arg> -->
+          factory-method="customObject" lazy-init="true">
     </bean>
 
-    <!-- BeanPostProcessor for @PostConstruct / @PreDestroy -->
+    <!-- These are the ONLY ACTIVE beans -->
+    <bean id="dao2" class="com.Pojo.Dow"/>
+    <bean id="service2" class="com.Pojo.Service">
+        <property name="dao" ref="dao2"/>
+    </bean>
+    <bean id="controller2" class="com.Pojo.Controller">
+        <property name="service" ref="service2"/>
+    </bean>
+
+    <!-- Required for @PostConstruct / @PreDestroy -->
     <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>
 
-    <!-- bean post processor -->
-    <bean id="dao2" class="com.dam.Dao"></bean>
-    <bean id="service2" class="com.dam.Service">
-        <property name="dao" ref="dao2"></property>
-    </bean>
-    <bean id="controller2" class="com.dam.Controller">
-
-        <property name="service" ref="service2"></property>
-    </bean>
-
+    <!-- Your custom BeanPostProcessor -->
+    <bean id="beanpost" class="com.Pojo.BeanPostProccessorImpl" />
 </beans>

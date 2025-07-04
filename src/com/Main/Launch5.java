@@ -2,7 +2,9 @@ package com.Main;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import dam.Controller;
+import com.Pojo.Controller;
+
+
 
 public class Launch5 {
      public static void main(String[] args) {
